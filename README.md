@@ -6,6 +6,43 @@
 [![Contributor
 Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
 
+## Build Instructions [Added by UofM]
+1. Install Spack and create environment
+```bash
+git clone --depth=100 --branch=releases/v0.21 https://github.com/spack/spack.git ~/spack
+cd ~/spack/
+. share/spack/setup-env.sh
+spack env activate UME
+```
+
+2. Install packages using Spack
+```
+Copy the following into a file called `spack.yaml` into /home/${USERID}/spack/var/spack/environments/UME/spack.yaml
+
+spack:
+  specs:
+    - catch2
+    - cmake
+    - doxygen
+    - git
+    - graphviz
+    - kokkos+openmp std=20
+    - openmpi
+  packages:
+    catch2:
+      require: '@3:'
+
+If error occurs, make sure you have the following two lines in compiler spec that has gcc@12.3.0
+
+f77: /usr/bin/gfortran
+fc: /usr/bin/gfortran
+```
+
+3. Then Build UME using cmake
+```bash
+mkdir build
+cmake ..  -DUSE_CATCH2=NO -DUSE_KOKKOS=YES -DUSE_MPI=YES -DUSE_OPENACC=YES
+```
 
 ## Description
 
