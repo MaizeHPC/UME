@@ -115,7 +115,7 @@ void gradzatp(Ume::SOA_Idx::Mesh &mesh, DBLV_T const &zone_field,
 #ifdef USE_CLIENT
   struct request req1;
   scoria_read(client, zone_field.data(), cl, packed_zf.data(),
-      mc_to_z_map.data(), NULL, num_threads, NONE, &req1);
+      mc_to_z_map.data(), NULL, num_threads, NONE, &req1, NULL);
   scoria_wait_request(client, &req1);
 #else
   read_multi_thread_1(packed_zf.data(), zone_field.data(), cl,
@@ -382,22 +382,22 @@ void gradzatz(Ume::SOA_Idx::Mesh &mesh, DBLV_T const &zone_field,
 #ifdef USE_CLIENT
   struct request req2;
   scoria_read(client, point_gradient_x.data(), num_local_corners,
-      packed_pg_x.data(), mc_to_p_map.data(), NULL, num_threads, NONE, &req2);
+      packed_pg_x.data(), mc_to_p_map.data(), NULL, num_threads, NONE, &req2, NULL);
   scoria_wait_request(client, &req2);
 
   struct request req3;
   scoria_read(client, point_gradient_y.data(), num_local_corners,
-      packed_pg_y.data(), mc_to_p_map.data(), NULL, num_threads, NONE, &req3);
+      packed_pg_y.data(), mc_to_p_map.data(), NULL, num_threads, NONE, &req3, NULL);
   scoria_wait_request(client, &req3);
 
   struct request req4;
   scoria_read(client, point_gradient_z.data(), num_local_corners,
-      packed_pg_z.data(), mc_to_p_map.data(), NULL, num_threads, NONE, &req4);
+      packed_pg_z.data(), mc_to_p_map.data(), NULL, num_threads, NONE, &req4, NULL);
   scoria_wait_request(client, &req4);
 
   struct request req5;
   scoria_read(client, zone_volume.data(), num_local_corners, packed_zv.data(),
-      mc_to_z_map.data(), NULL, num_threads, NONE, &req5);
+      mc_to_z_map.data(), NULL, num_threads, NONE, &req5, NULL);
   scoria_wait_request(client, &req5);
 #else
   read_multi_thread_1(packed_pg_x.data(), point_gradient_x.data(),
@@ -594,27 +594,27 @@ void gradzatp_invert(Ume::SOA_Idx::Mesh &mesh, DBLV_T const &zone_field,
 #ifdef USE_CLIENT
   struct request req1;
   scoria_read(client, corner_volume.data(), corner_count, packed_cv.data(),
-      mp_to_c_map.data(), NULL, num_threads, NONE, &req1);
+      mp_to_c_map.data(), NULL, num_threads, NONE, &req1, NULL);
   scoria_wait_request(client, &req1);
 
   struct request req2;
   scoria_read(client, zone_field.data(), corner_count, packed_zf.data(),
-      mp_to_c_map.data(), mc_to_z_map.data(), num_threads, NONE, &req2);
+      mp_to_c_map.data(), mc_to_z_map.data(), num_threads, NONE, &req2, NULL);
   scoria_wait_request(client, &req2);
 
   struct request req3;
   scoria_read(client, csurf_x.data(), corner_count, packed_csurf_x.data(),
-      mp_to_c_map.data(), NULL, num_threads, NONE, &req3);
+      mp_to_c_map.data(), NULL, num_threads, NONE, &req3, NULL);
   scoria_wait_request(client, &req3);
 
   struct request req4;
   scoria_read(client, csurf_y.data(), corner_count, packed_csurf_y.data(),
-      mp_to_c_map.data(), NULL, num_threads, NONE, &req4);
+      mp_to_c_map.data(), NULL, num_threads, NONE, &req4, NULL);
   scoria_wait_request(client, &req4);
 
   struct request req5;
   scoria_read(client, csurf_z.data(), corner_count, packed_csurf_z.data(),
-      mp_to_c_map.data(), NULL, num_threads, NONE, &req5);
+      mp_to_c_map.data(), NULL, num_threads, NONE, &req5, NULL);
   scoria_wait_request(client, &req5);
 #else
   read_multi_thread_1(packed_cv.data(), corner_volume.data(), corner_count,
@@ -812,22 +812,22 @@ void gradzatz_invert(Ume::SOA_Idx::Mesh &mesh, DBLV_T const &zone_field,
 #ifdef USE_CLIENT
   struct request req1;
   scoria_read(client, corner_volume.data(), corner_count, packed_cv.data(),
-      mz_to_c_map.data(), NULL, num_threads, NONE, &req1);
+      mz_to_c_map.data(), NULL, num_threads, NONE, &req1, NULL);
   scoria_wait_request(client, &req1);
 
   struct request req2;
   scoria_read(client, point_gradient_x.data(), corner_count, packed_pg_x.data(),
-      mz_to_c_map.data(), mc_to_p_map.data(), num_threads, NONE, &req2);
+      mz_to_c_map.data(), mc_to_p_map.data(), num_threads, NONE, &req2, NULL);
   scoria_wait_request(client, &req2);
 
   struct request req3;
   scoria_read(client, point_gradient_y.data(), corner_count, packed_pg_y.data(),
-      mz_to_c_map.data(), mc_to_p_map.data(), num_threads, NONE, &req2);
+      mz_to_c_map.data(), mc_to_p_map.data(), num_threads, NONE, &req2, NULL);
   scoria_wait_request(client, &req3);
 
   struct request req4;
   scoria_read(client, point_gradient_z.data(), corner_count, packed_pg_z.data(),
-      mz_to_c_map.data(), mc_to_p_map.data(), num_threads, NONE, &req2);
+      mz_to_c_map.data(), mc_to_p_map.data(), num_threads, NONE, &req2, NULL);
   scoria_wait_request(client, &req4);
 #else
   read_multi_thread_1(packed_cv.data(), corner_volume.data(), corner_count,
